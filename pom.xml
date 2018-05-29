@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.fluig</groupId>
+	<artifactId>company-search</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>company-search</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<clover.version>4.2.1</clover.version>
+		<clover.default.db.dir>${project.basedir}/.clover/db/clover.db</clover.default.db.dir>
+		<clover.default.output.dir>${project.basedir}/.clover/report</clover.default.output.dir>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.openclover</groupId>
+				<artifactId>clover-maven-plugin</artifactId>
+				<version>${clover.version}</version>
+				<configuration>
+					<targetPercentage>70%</targetPercentage>
+					<cloverDatabase>${project.basedir}/target/.clover/db/clover.db</cloverDatabase>
+					<cloverMergeDatabase>${project.basedir}/target/.clover/merge/cloverMerge.db
+					</cloverMergeDatabase>
+					<contextFilters>iflog,log</contextFilters>
+					<outputDirectory>${project.basedir}/target/.clover/report</outputDirectory>
+					<includesTestSourceRoots>false</includesTestSourceRoots>
+					<statementContexts>
+						<log>System.out.println\(.*\);</log>
+						<iflog>if.*\(LOG\.is.*\.*</iflog>
+					</statementContexts>
+					<excludes>
+						<exclude>**/dbupdate/*.java</exclude>
+						<exclude>**/actuator/*.java</exclude>
+						<exclude>**/config/*.java</exclude>
+						<exclude>**/domain/*.java</exclude>
+						<exclude>**/*DTO.java</exclude>
+						<exclude>**/*Application.java</exclude>
+						<exclude>**/*Controller.java</exclude>
+						<exclude>**/*Exception.java</exclude>
+						<exclude>**/*Mapper.java</exclude>
+						<exclude>**/*RestPath.java</exclude>
+						<exclude>**/*Repository.java</exclude>
+						<exclude>**/*IT.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>main</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>instrument</goal>
+							<goal>aggregate</goal>
+							<goal>check</goal>
+							<goal>clover</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
