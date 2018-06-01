@@ -1,4 +1,4 @@
-package com.fluig.companysearch;
+package com.fluig;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

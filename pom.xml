@@ -63,17 +63,8 @@
 						<iflog>if.*\(LOG\.is.*\.*</iflog>
 					</statementContexts>
 					<excludes>
-						<exclude>**/dbupdate/*.java</exclude>
-						<exclude>**/actuator/*.java</exclude>
-						<exclude>**/config/*.java</exclude>
-						<exclude>**/domain/*.java</exclude>
-						<exclude>**/*DTO.java</exclude>
 						<exclude>**/*Application.java</exclude>
-						<exclude>**/*Controller.java</exclude>
-						<exclude>**/*Exception.java</exclude>
-						<exclude>**/*Mapper.java</exclude>
 						<exclude>**/*RestPath.java</exclude>
-						<exclude>**/*Repository.java</exclude>
 						<exclude>**/*IT.java</exclude>
 					</excludes>
 				</configuration>
