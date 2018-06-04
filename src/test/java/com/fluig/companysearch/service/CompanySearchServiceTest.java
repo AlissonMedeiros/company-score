@@ -2,10 +2,10 @@ package com.fluig.companysearch.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fluig.companysearch.model.Companies;
-import com.fluig.companysearch.model.Company;
-import com.fluig.companysearch.model.CompanyDetails;
-import com.fluig.companysearch.model.CompanyIndex;
+import com.fluig.companysearch.domain.Companies;
+import com.fluig.companysearch.domain.Company;
+import com.fluig.companysearch.domain.CompanyDetails;
+import com.fluig.companysearch.domain.CompanyIndex;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

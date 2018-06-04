@@ -1,4 +1,4 @@
-package com.fluig.companysearch.model;
+package com.fluig.companysearch.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -9,6 +9,7 @@ public class Company {
 
     public String id;
     public String companyName;
+    // pra que serve?
     public Integer count;
     public String fantasyName;
     public String shortname;

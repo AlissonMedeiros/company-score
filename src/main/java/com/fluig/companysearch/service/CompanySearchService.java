@@ -1,13 +1,22 @@
 package com.fluig.companysearch.service;
 
-import com.fluig.companysearch.model.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.fluig.companysearch.domain.Companies;
+import com.fluig.companysearch.domain.Company;
+import com.fluig.companysearch.domain.CompanyDetails;
+import com.fluig.companysearch.domain.CompanyIndex;
+import com.fluig.companysearch.domain.CompanyStatus;
+import com.fluig.companysearch.domain.IndexType;
+import com.fluig.companysearch.domain.Ranking;
+import com.fluig.companysearch.domain.Rankings;
 
 @Service
 public class CompanySearchService {
@@ -22,7 +31,13 @@ public class CompanySearchService {
     }
 
     public List<CompanyIndex> get(String id) {
-        ResponseEntity<CompanyDetails> response = restTemplate.getForEntity(DETAILS_URL, CompanyDetails.class, id);
+        ResponseEntity<CompanyDetails> response = null;
+        try {
+            response = restTemplate.getForEntity(DETAILS_URL, CompanyDetails.class, id);
+        }catch (Exception e){ }
+        if (response == null){
+            return Collections.emptyList();
+        }
         CompanyDetails indexes = response.getBody();
         return indexes.companyIndexes.stream()
                 .map(json -> getIndex(json))
@@ -64,7 +79,7 @@ public class CompanySearchService {
 
     private IndexType getType(List<String> values) {
         String status = getString("type", values);
-        if(status != null) {
+        if (status != null) {
             return IndexType.valueOf(status.trim());
         }
         return null;
@@ -72,7 +87,7 @@ public class CompanySearchService {
 
     private CompanyStatus getStatus(List<String> values) {
         String status = getString("status", values);
-        if(status != null) {
+        if (status != null) {
             return CompanyStatus.valueOf(status.trim());
         }
         return null;
@@ -95,5 +110,28 @@ public class CompanySearchService {
 
     private String getValue(String key, String v) {
         return v.replace(key + "=", "");
+    }
+
+    public Rankings getRankings(List<Company> companies) {
+        Rankings rankings = new Rankings();
+        for (Company company : companies) {
+            List<CompanyIndex> companyIndices = get(company.id);
+            Ranking ranking = calculateRanking(companyIndices, company);
+            rankings.rankingList.add(ranking);
+        }
+        return rankings;
+
+
+    }
+
+    private Ranking calculateRanking(List<CompanyIndex> companyIndices, Company company) {
+        Ranking ranking = new Ranking();
+        ranking.company = company;
+        for (CompanyIndex companyIndex : companyIndices) {
+            //calcula grade;
+            System.out.println(companyIndex.consumerScore);
+        }
+        ranking.grade = new Double((int) (Math.random() * 10) + 1);
+        return ranking;
     }
 }

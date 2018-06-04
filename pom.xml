@@ -11,31 +11,52 @@
 	<name>company-search</name>
 	<description>Demo project for Spring Boot</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
 		<clover.version>4.2.1</clover.version>
 		<clover.default.db.dir>${project.basedir}/.clover/db/clover.db</clover.default.db.dir>
 		<clover.default.output.dir>${project.basedir}/.clover/report</clover.default.output.dir>
+		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
+		<fluig.starter.version>1.0.0-SNAPSHOT</fluig.starter.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.fluig</groupId>
+				<artifactId>fluig-starter-dependencies</artifactId>
+				<version>${fluig.starter.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>com.fluig</groupId>
+			<artifactId>fluig-starter-test</artifactId>
+			<version>${fluig.starter.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

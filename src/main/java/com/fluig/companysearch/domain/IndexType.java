@@ -1,4 +1,4 @@
-package com.fluig.companysearch.model;
+package com.fluig.companysearch.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

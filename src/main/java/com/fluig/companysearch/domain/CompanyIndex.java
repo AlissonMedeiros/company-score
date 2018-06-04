@@ -1,4 +1,4 @@
-package com.fluig.companysearch.model;
+package com.fluig.companysearch.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,5 +20,6 @@ public class CompanyIndex {
     public Long totalEvaluated;
     public Double answeredPercentual;
     public CompanyStatus status;
+    public Company company;
 
 }
