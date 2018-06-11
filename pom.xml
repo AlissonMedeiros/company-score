@@ -17,11 +17,11 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
+		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
+		<fluig.starter.version>1.0.1-SNAPSHOT</fluig.starter.version>
 		<clover.version>4.2.1</clover.version>
 		<clover.default.db.dir>${project.basedir}/.clover/db/clover.db</clover.default.db.dir>
 		<clover.default.output.dir>${project.basedir}/.clover/report</clover.default.output.dir>
-		<spring.boot.version>2.0.2.RELEASE</spring.boot.version>
-		<fluig.starter.version>1.0.0-SNAPSHOT</fluig.starter.version>
 	</properties>
 
 	<dependencyManagement>
@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>com.fluig</groupId>
 			<artifactId>fluig-starter-test</artifactId>
-			<version>${fluig.starter.version}</version>
+			<version>1.0.0-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
