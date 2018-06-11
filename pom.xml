@@ -72,7 +72,7 @@
 				<artifactId>clover-maven-plugin</artifactId>
 				<version>${clover.version}</version>
 				<configuration>
-					<targetPercentage>70%</targetPercentage>
+					<targetPercentage>60%</targetPercentage>
 					<cloverDatabase>${project.basedir}/target/.clover/db/clover.db</cloverDatabase>
 					<cloverMergeDatabase>${project.basedir}/target/.clover/merge/cloverMerge.db
 					</cloverMergeDatabase>
@@ -83,11 +83,6 @@
 						<log>System.out.println\(.*\);</log>
 						<iflog>if.*\(LOG\.is.*\.*</iflog>
 					</statementContexts>
-					<excludes>
-						<exclude>**/*Application.java</exclude>
-						<exclude>**/*RestPath.java</exclude>
-						<exclude>**/*IT.java</exclude>
-					</excludes>
 				</configuration>
 				<executions>
 					<execution>
@@ -114,6 +109,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<coverageThreshold>18</coverageThreshold>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
